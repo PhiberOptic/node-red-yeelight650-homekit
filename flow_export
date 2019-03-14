@@ -1,0 +1,2670 @@
+[
+    {
+        "id": "91493882.e5498",
+        "type": "tab",
+        "label": "Yeelight 650",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "47c8bcac.e4136c",
+        "type": "homekit-service",
+        "z": "91493882.e5498",
+        "bridge": "f9a77c1b.b12fd",
+        "name": "Подсветка",
+        "serviceName": "Lightbulb",
+        "manufacturer": "423",
+        "model": "534",
+        "serialNo": "345",
+        "characteristicProperties": "",
+        "x": 495,
+        "y": 1119.9998931884766,
+        "wires": [
+            [
+                "2f805e9c.f78652"
+            ]
+        ]
+    },
+    {
+        "id": "8bf2c87d.48b638",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "онофф",
+        "func": "var characteristic = {};\n\ncharacteristic.On = msg.payload.bg_On;\n\n\n\nmsg.payload = characteristic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 256,
+        "y": 1033.9998626708984,
+        "wires": [
+            [
+                "47c8bcac.e4136c"
+            ]
+        ]
+    },
+    {
+        "id": "f349f06f.27c9e",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "ct",
+        "property": "payload.ColorTemperature",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 834.5000305175781,
+        "y": 1193.9998168945312,
+        "wires": [
+            [
+                "cdaef18e.82a0d"
+            ]
+        ]
+    },
+    {
+        "id": "1146f06f.5e3d4",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "on",
+        "property": "payload.On",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 818.9999694824219,
+        "y": 1107.9999389648438,
+        "wires": [
+            [
+                "ef6411f7.848bb",
+                "210d5aae.c20ee6"
+            ],
+            [
+                "69281810.426a"
+            ]
+        ]
+    },
+    {
+        "id": "50c24f12.849628",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "яркость",
+        "property": "payload.Brightness",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 830.0000305175781,
+        "y": 1155.9998168945312,
+        "wires": [
+            [
+                "43e8095.08338f8"
+            ]
+        ]
+    },
+    {
+        "id": "16b1982f.94f2d8",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "hue",
+        "property": "payload.Hue",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 835.0000305175781,
+        "y": 1240.9998168945312,
+        "wires": [
+            [
+                "a6534590.1fd6e8"
+            ]
+        ]
+    },
+    {
+        "id": "3505eaab.a34f2e",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "saturation",
+        "property": "payload.Saturation",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 310.0000305175781,
+        "y": 1325.9998168945312,
+        "wires": [
+            [
+                "c80d968d.97626"
+            ]
+        ]
+    },
+    {
+        "id": "d89121ed.0ba9e",
+        "type": "tcp out",
+        "z": "91493882.e5498",
+        "host": "192.168.88.254",
+        "port": "55443",
+        "beserver": "client",
+        "base64": false,
+        "end": true,
+        "name": "yeelight 650",
+        "x": 509.4090938568115,
+        "y": 20.81818199157715,
+        "wires": []
+    },
+    {
+        "id": "ef6411f7.848bb",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "ambi_on",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"bg_set_power\",\n    \"params\":[\n        \"on\",\n        \"smooth\",\n        500,\n        3\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1001.9999694824219,
+        "y": 1065.9998168945312,
+        "wires": [
+            [
+                "c2d774f3.9249f8"
+            ]
+        ]
+    },
+    {
+        "id": "43e8095.08338f8",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Яркость",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"bg_set_bright\",\n    \"params\":[\n        msg.payload.Brightness,\n        \"sudden\",\n        500\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1010.0000305175781,
+        "y": 1157.9999389648438,
+        "wires": [
+            [
+                "65ab72a8.4de694"
+            ]
+        ]
+    },
+    {
+        "id": "ee11ba8a.4de128",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "цвет",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"bg_set_hsv\",\n    \"params\":[\n        msg.payload.Hue,\n        msg.payload.Saturation,\n        \"smooth\",\n        500\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 931.0000305175781,
+        "y": 1323.9998168945312,
+        "wires": [
+            [
+                "64459737.bcf258"
+            ]
+        ]
+    },
+    {
+        "id": "c80d968d.97626",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "запоминаем Saturation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Saturation",
+                "pt": "flow",
+                "to": "payload.Saturation",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 509.0000305175781,
+        "y": 1324.9998168945312,
+        "wires": [
+            [
+                "42d4bba9.10d3fc"
+            ]
+        ]
+    },
+    {
+        "id": "a6534590.1fd6e8",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Запоминаем hue",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Hue",
+                "pt": "flow",
+                "to": "payload.Hue",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 506.0000305175781,
+        "y": 1281.9998168945312,
+        "wires": [
+            [
+                "14b4afb1.15fa28"
+            ]
+        ]
+    },
+    {
+        "id": "14b4afb1.15fa28",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Добавляем saturation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Saturation",
+                "pt": "msg",
+                "to": "payload.Saturation",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 715.0000305175781,
+        "y": 1282.9998168945312,
+        "wires": [
+            [
+                "ee11ba8a.4de128",
+                "84949fee.a649f"
+            ]
+        ]
+    },
+    {
+        "id": "42d4bba9.10d3fc",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Добавляем Hue",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.hue",
+                "pt": "msg",
+                "to": "payload.hue",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 731.0000305175781,
+        "y": 1324.9998168945312,
+        "wires": [
+            [
+                "ee11ba8a.4de128",
+                "84949fee.a649f"
+            ]
+        ]
+    },
+    {
+        "id": "cdaef18e.82a0d",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "ct",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"bg_set_ct_abx\",\n    \"params\":[\n        (8200-msg.payload.ColorTemperature*13),\n        \"sudden\",\n        500\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 980.0000305175781,
+        "y": 1190.9998168945312,
+        "wires": [
+            [
+                "7f1f7bb8.82462c"
+            ]
+        ]
+    },
+    {
+        "id": "b5572b4f.cb7cf8",
+        "type": "tcp request",
+        "z": "91493882.e5498",
+        "server": "192.168.88.254",
+        "port": "55443",
+        "out": "sit",
+        "splitc": " ",
+        "name": "yeelight 650",
+        "x": 506.5,
+        "y": 78,
+        "wires": [
+            [
+                "ba0bc0ae.d1583"
+            ]
+        ]
+    },
+    {
+        "id": "10acdaca.5e2e45",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "конверт",
+        "func": "\nreturn { payload: JSON.stringify(msg.payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 351,
+        "y": 79,
+        "wires": [
+            [
+                "b5572b4f.cb7cf8"
+            ]
+        ]
+    },
+    {
+        "id": "ba0bc0ae.d1583",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "конверт",
+        "func": "\nreturn { payload: JSON.parse(msg.payload)};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 654,
+        "y": 78,
+        "wires": [
+            [
+                "3d108b15.666b14"
+            ]
+        ]
+    },
+    {
+        "id": "f1af35ae.5dd1",
+        "type": "inject",
+        "z": "91493882.e5498",
+        "name": "Все параметры",
+        "topic": "",
+        "payload": "{\"id\":1,\"method\":\"get_prop\",\"params\":[\"power\",\"bright\",\"ct\",\"bg_power\",\"bg_ct\",\"bg_bright\",\"bg_hue\",\"bg_sat\",\"active_mode\"]}",
+        "payloadType": "json",
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 178,
+        "y": 79,
+        "wires": [
+            [
+                "10acdaca.5e2e45"
+            ]
+        ]
+    },
+    {
+        "id": "3d108b15.666b14",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Начальные параметры",
+        "property": "payload.id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 153.5,
+        "y": 146,
+        "wires": [
+            [
+                "d817bdc7.b2ba88"
+            ],
+            [
+                "681b5f60.0e2df",
+                "ce606197.789318"
+            ]
+        ]
+    },
+    {
+        "id": "f7510000.59d57",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Подсв вкл",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.bg_On",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "payload.bg_On",
+                "pt": "flow",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 874.5,
+        "y": 121,
+        "wires": [
+            [
+                "d57cc5d3.27f7a"
+            ]
+        ]
+    },
+    {
+        "id": "307d9ff.e3a0ee",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Подсв вкл/выкл",
+        "property": "payload.result[3]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 698.5,
+        "y": 148,
+        "wires": [
+            [
+                "f7510000.59d57"
+            ],
+            [
+                "462f3669.d4c62"
+            ]
+        ]
+    },
+    {
+        "id": "462f3669.d4c62",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Подсв выкл",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.bg_On",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "payload.bg_On",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 883,
+        "y": 170,
+        "wires": [
+            [
+                "d57cc5d3.27f7a"
+            ]
+        ]
+    },
+    {
+        "id": "d57cc5d3.27f7a",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Остальные параметры",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Brightness",
+                "pt": "msg",
+                "to": "$number(payload.result[1])",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload.ColorTemperature",
+                "pt": "msg",
+                "to": "$number(payload.result[2])",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload.bg_ColorTemperature",
+                "pt": "msg",
+                "to": "$number(payload.result[4])",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload.bg_Brightness",
+                "pt": "msg",
+                "to": "$number(payload.result[5])",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload.bg_Hue",
+                "pt": "msg",
+                "to": "$number(payload.result[6])",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload.bg_Saturation",
+                "pt": "msg",
+                "to": "$number(payload.result[7])",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload.params.active_mode",
+                "pt": "msg",
+                "to": "$number(payload.result[8])",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1094,
+        "y": 146,
+        "wires": [
+            [
+                "cd264431.2cb0a"
+            ]
+        ]
+    },
+    {
+        "id": "b7093812.abc958",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Осн выкл",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.On",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "payload.Osnova_On",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 517,
+        "y": 171,
+        "wires": [
+            [
+                "307d9ff.e3a0ee"
+            ]
+        ]
+    },
+    {
+        "id": "97b266d4.23cf1",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Осн вкл",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.On",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "payload.Osnova_On",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520.5,
+        "y": 132,
+        "wires": [
+            [
+                "307d9ff.e3a0ee"
+            ]
+        ]
+    },
+    {
+        "id": "d817bdc7.b2ba88",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "осн вкл/выкл",
+        "property": "payload.result[0]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 364.5,
+        "y": 138,
+        "wires": [
+            [
+                "97b266d4.23cf1"
+            ],
+            [
+                "b7093812.abc958"
+            ]
+        ]
+    },
+    {
+        "id": "681b5f60.0e2df",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Изменение Питания",
+        "property": "payload.params.power",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "string",
+                "vt": "string"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 166,
+        "y": 234.99999618530273,
+        "wires": [
+            [
+                "4a73ad58.49fddc"
+            ],
+            [
+                "965eaccb.6e4a1",
+                "b843ce75.9ed83"
+            ]
+        ]
+    },
+    {
+        "id": "498a11bd.77fcb8",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "хуе",
+        "func": "var characteristic = {};\n\ncharacteristic.Hue = msg.payload.bg_Hue;\n\nmsg.payload = characteristic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 260.5,
+        "y": 1153.9998626708984,
+        "wires": [
+            [
+                "47c8bcac.e4136c"
+            ]
+        ]
+    },
+    {
+        "id": "6cc2364.bb78448",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "sat",
+        "func": "var characteristic = {};\n\ncharacteristic.Saturation = msg.payload.bg_Saturation;\n\nmsg.payload = characteristic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 264.5,
+        "y": 1199.9998626708984,
+        "wires": [
+            [
+                "47c8bcac.e4136c"
+            ]
+        ]
+    },
+    {
+        "id": "bd3ba4a5.06e84",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "ст",
+        "func": "var characteristic = {};\n\n\ncharacteristic.ColorTemperature = msg.payload.bg_ColorTemperature;\n\nmsg.payload = characteristic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 267.5,
+        "y": 1115.9998626708984,
+        "wires": [
+            [
+                "47c8bcac.e4136c"
+            ]
+        ]
+    },
+    {
+        "id": "a32370fc.78d048",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Яркость",
+        "func": "var characteristic = {};\n\n\ncharacteristic.Brightness = msg.payload.bg_Brightness;\n\nmsg.payload = characteristic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 265.5,
+        "y": 1072.9998626708984,
+        "wires": [
+            [
+                "47c8bcac.e4136c"
+            ]
+        ]
+    },
+    {
+        "id": "b1fe9e56.f15228",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "подсветка вкл/выкл",
+        "property": "payload.params.bg_power",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 453.0000915527344,
+        "y": 299.99998474121094,
+        "wires": [
+            [
+                "1da3d14d.a4776f"
+            ],
+            [
+                "5759292e.6f8b6"
+            ]
+        ]
+    },
+    {
+        "id": "1da3d14d.a4776f",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "ПОдсветка включен",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.bg_On",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 676.0000915527344,
+        "y": 279.99998474121094,
+        "wires": [
+            [
+                "28d34cfa.30af5c"
+            ]
+        ]
+    },
+    {
+        "id": "5759292e.6f8b6",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Подсветка выключен",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.bg_On",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 675.5000915527344,
+        "y": 319.99998474121094,
+        "wires": [
+            [
+                "28d34cfa.30af5c"
+            ]
+        ]
+    },
+    {
+        "id": "ce606197.789318",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Изменение Питания подсветки",
+        "property": "payload.params.bg_power",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "string",
+                "vt": "string"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 178.00009155273438,
+        "y": 306.99998474121094,
+        "wires": [
+            [
+                "b1fe9e56.f15228"
+            ],
+            [
+                "965eaccb.6e4a1",
+                "b843ce75.9ed83"
+            ]
+        ]
+    },
+    {
+        "id": "1b68548c.f3461b",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Изменение Яркости подсветки",
+        "property": "payload.params.bg_bright",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 238,
+        "y": 557.9999885559082,
+        "wires": [
+            [
+                "bc0593af.c9a35"
+            ],
+            [
+                "678c7991.e9c308"
+            ]
+        ]
+    },
+    {
+        "id": "bc0593af.c9a35",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Подсветка Яркость",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.bg_Brightness",
+                "pt": "msg",
+                "to": "payload.params.bg_bright",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.bg_Brightness",
+                "pt": "flow",
+                "to": "payload.params.bg_bright",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 505,
+        "y": 550.9999885559082,
+        "wires": [
+            [
+                "1d48a22c.aab546"
+            ]
+        ]
+    },
+    {
+        "id": "a0d1c104.c01558",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Подсветка Hue",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.bg_Hue",
+                "pt": "msg",
+                "to": "payload.params.bg_hue",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.bg_Hue",
+                "pt": "flow",
+                "to": "payload.params.bg_hue",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 756,
+        "y": 649.9999885559082,
+        "wires": [
+            [
+                "69ad63a.dbc441c"
+            ]
+        ]
+    },
+    {
+        "id": "25001775.2b0db8",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Подсветка sat",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.bg_Saturation",
+                "pt": "msg",
+                "to": "payload.params.bg_sat",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 442,
+        "y": 692.9999885559082,
+        "wires": [
+            [
+                "551d26da.c706b"
+            ]
+        ]
+    },
+    {
+        "id": "678c7991.e9c308",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Изменение ct подсветки",
+        "property": "payload.params.bg_ct",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 207,
+        "y": 615.9999885559082,
+        "wires": [
+            [
+                "ba2cd813.4faf58"
+            ],
+            [
+                "f2c00f09.976ab",
+                "64988cbe.a4473c"
+            ]
+        ]
+    },
+    {
+        "id": "f2c00f09.976ab",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Изменение HUe подсветки",
+        "property": "payload.params.bg_hue",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 526,
+        "y": 649.9999885559082,
+        "wires": [
+            [
+                "a0d1c104.c01558"
+            ]
+        ]
+    },
+    {
+        "id": "64988cbe.a4473c",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Изменение sat подсветки",
+        "property": "payload.params.bg_bright",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 214,
+        "y": 693.0000038146973,
+        "wires": [
+            [
+                "25001775.2b0db8"
+            ]
+        ]
+    },
+    {
+        "id": "210d5aae.c20ee6",
+        "type": "trigger",
+        "z": "91493882.e5498",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "pay",
+        "duration": "500",
+        "extend": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 619.4999694824219,
+        "y": 1056.9999389648438,
+        "wires": [
+            [
+                "27ffb74d.cdf018"
+            ]
+        ]
+    },
+    {
+        "id": "84949fee.a649f",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "ambi_on",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"bg_set_power\",\n    \"params\":[\n        \"jn\",\n        \"smooth\",\n        500,\n        3\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 933.0000305175781,
+        "y": 1281.9998168945312,
+        "wires": [
+            [
+                "75bcb5bf.73390c"
+            ]
+        ]
+    },
+    {
+        "id": "965eaccb.6e4a1",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Изменение Яркости",
+        "property": "payload.params.active_bright",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 467,
+        "y": 408.0000457763672,
+        "wires": [
+            [
+                "48fcbba1.153564"
+            ],
+            [
+                "b397a020.0d92c8"
+            ]
+        ]
+    },
+    {
+        "id": "48fcbba1.153564",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Яркость",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Brightness",
+                "pt": "msg",
+                "to": "payload.params.bg_bright",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.bg_Brightness",
+                "pt": "flow",
+                "to": "payload.params.bg_bright",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 724.0000915527344,
+        "y": 428.00012969970703,
+        "wires": [
+            [
+                "b8434e6c.404c98"
+            ]
+        ]
+    },
+    {
+        "id": "b397a020.0d92c8",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Изменение ст",
+        "property": "payload.params.ct",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 192,
+        "y": 505.00001525878906,
+        "wires": [
+            [
+                "89f9668.ac52118"
+            ],
+            [
+                "1b68548c.f3461b"
+            ]
+        ]
+    },
+    {
+        "id": "f9d67379.8c34",
+        "type": "homekit-service",
+        "z": "91493882.e5498",
+        "bridge": "f9a77c1b.b12fd",
+        "name": "Основной",
+        "serviceName": "Lightbulb",
+        "manufacturer": "423",
+        "model": "53423453",
+        "serialNo": "345",
+        "characteristicProperties": "",
+        "x": 499,
+        "y": 934.9998931884766,
+        "wires": [
+            [
+                "53d12eb3.57bb8"
+            ]
+        ]
+    },
+    {
+        "id": "cb65527.c4c123",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "ст",
+        "func": "var characteristic = {};\n\n\ncharacteristic.ColorTemperature = msg.payload.ColorTemperature;\n\nmsg.payload = characteristic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 264.5,
+        "y": 976.9998626708984,
+        "wires": [
+            [
+                "f9d67379.8c34"
+            ]
+        ]
+    },
+    {
+        "id": "e0b4e9fe.683648",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Яркость",
+        "func": "var characteristic = {};\n\n\ncharacteristic.Brightness = msg.payload.Brightness;\n\nmsg.payload = characteristic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 266.5,
+        "y": 933.9998626708984,
+        "wires": [
+            [
+                "f9d67379.8c34"
+            ]
+        ]
+    },
+    {
+        "id": "cd5d320b.cbd548",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Яркость",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"set_bright\",\n    \"params\":[\n        msg.payload.Brightness,\n        \"smooth\",\n        500\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 974,
+        "y": 977.9998626708984,
+        "wires": [
+            [
+                "133ba6ad.21bbe1"
+            ]
+        ]
+    },
+    {
+        "id": "894495ff.99ca8",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "ct",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"set_ct_abx\",\n    \"params\":[\n        (8200-msg.payload.ColorTemperature*13),\n        \"smooth\",\n        500\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 973,
+        "y": 939.9998626708984,
+        "wires": [
+            [
+                "ff94da8f.a4de38"
+            ]
+        ]
+    },
+    {
+        "id": "40c81cae.6aec14",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "яркость",
+        "property": "payload.Brightness",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 821,
+        "y": 976.9998626708984,
+        "wires": [
+            [
+                "cd5d320b.cbd548"
+            ]
+        ]
+    },
+    {
+        "id": "c84c84a0.7373c8",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "on",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"set_power\",\n    \"params\":[\n        \"on\",\n        \"smooth\",\n        1000,\n        1\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 953,
+        "y": 860.9998626708984,
+        "wires": [
+            [
+                "d7261c5a.31559"
+            ]
+        ]
+    },
+    {
+        "id": "d5da233d.40f718",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "on",
+        "property": "payload.On",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 814,
+        "y": 883.9998626708984,
+        "wires": [
+            [
+                "c84c84a0.7373c8"
+            ],
+            [
+                "626713d7.89584c"
+            ]
+        ]
+    },
+    {
+        "id": "626713d7.89584c",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "off",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"set_power\",\n    \"params\":[\n        \"off\",\n        \"smooth\",\n        500,\n        1\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 956,
+        "y": 901.9998626708984,
+        "wires": [
+            [
+                "de55c14e.0d7fe8"
+            ]
+        ]
+    },
+    {
+        "id": "aefef378.a3d9d",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Онофф",
+        "func": "var characteristic = {};\n\ncharacteristic.On = msg.payload.On;\n\n\n\nmsg.payload = characteristic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 265,
+        "y": 888.9998626708984,
+        "wires": [
+            [
+                "f9d67379.8c34"
+            ]
+        ]
+    },
+    {
+        "id": "69281810.426a",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "ambi_off",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"bg_set_power\",\n    \"params\":[\n        \"off\",\n        \"smooth\",\n        500,\n        3\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 999,
+        "y": 1108.9998016357422,
+        "wires": [
+            [
+                "adc6d672.e2ba6"
+            ]
+        ]
+    },
+    {
+        "id": "89f9668.ac52118",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Конверт ct",
+        "func": "msg.payload.ColorTemperature = 640 - Math.round(msg.payload.params.ct/13);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 374.5,
+        "y": 498.00001525878906,
+        "wires": [
+            [
+                "7f6f5fb7.0f5e28"
+            ]
+        ]
+    },
+    {
+        "id": "ba2cd813.4faf58",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Конверт bg_ct",
+        "func": "msg.payload.bg_ColorTemperature = 640 - Math.round(msg.payload.params.bg_ct/13);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 463,
+        "y": 613.9999885559082,
+        "wires": [
+            [
+                "f9cfd7ed.ad68b8"
+            ]
+        ]
+    },
+    {
+        "id": "f9cfd7ed.ad68b8",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "больше 500",
+        "property": "msg.payload.bg_ColorTemperature",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "500",
+                "vt": "str"
+            },
+            {
+                "t": "lte",
+                "v": "500",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 632.5,
+        "y": 612.9999885559082,
+        "wires": [
+            [
+                "3e2cc119.89c1b6"
+            ],
+            [
+                "1cc7425d.ffeb2e"
+            ]
+        ]
+    },
+    {
+        "id": "3e2cc119.89c1b6",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "500",
+        "rules": [
+            {
+                "t": "set",
+                "p": "msg.payload.bg_ColorTemperature",
+                "pt": "msg",
+                "to": "500",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 779.5,
+        "y": 578.9999885559082,
+        "wires": [
+            [
+                "611874d5.5729dc"
+            ]
+        ]
+    },
+    {
+        "id": "7f6f5fb7.0f5e28",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "больше 500",
+        "property": "msg.payload.ColorTemperature",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "500",
+                "vt": "num"
+            },
+            {
+                "t": "lte",
+                "v": "500",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 538,
+        "y": 499.00001525878906,
+        "wires": [
+            [
+                "46ffdfd2.b06f9"
+            ],
+            [
+                "4a2a9117.32aa2"
+            ]
+        ]
+    },
+    {
+        "id": "46ffdfd2.b06f9",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "500",
+        "rules": [
+            {
+                "t": "set",
+                "p": "msg.payload.ColorTemperature",
+                "pt": "msg",
+                "to": "500",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 685,
+        "y": 481.00001525878906,
+        "wires": [
+            [
+                "4a2a9117.32aa2"
+            ]
+        ]
+    },
+    {
+        "id": "cb87a99c.d4e1d8",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "ct",
+        "property": "payload.ColorTemperature",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 811,
+        "y": 936.9998626708984,
+        "wires": [
+            [
+                "894495ff.99ca8"
+            ]
+        ]
+    },
+    {
+        "id": "5f119f9.7abaee",
+        "type": "homekit-service",
+        "z": "91493882.e5498",
+        "bridge": "f9a77c1b.b12fd",
+        "name": "Луна",
+        "serviceName": "Switch",
+        "manufacturer": "Default Manufacturer",
+        "model": "Default Model",
+        "serialNo": "Default Serial Number",
+        "characteristicProperties": "{}",
+        "x": 520.5,
+        "y": 786.9998779296875,
+        "wires": [
+            [
+                "6899ce0.a342234"
+            ]
+        ]
+    },
+    {
+        "id": "64ef165e.357f58",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "режим",
+        "property": "payload.params.active_mode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 262,
+        "y": 785.9998779296875,
+        "wires": [
+            [
+                "64ae73b7.a4b444"
+            ],
+            [
+                "d89d11e3.9494f"
+            ]
+        ]
+    },
+    {
+        "id": "d89d11e3.9494f",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "он",
+        "func": "var characteristic = {};\n\ncharacteristic.On = true;\n\n\n\nmsg.payload = characteristic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 394,
+        "y": 803.9998779296875,
+        "wires": [
+            [
+                "5f119f9.7abaee"
+            ]
+        ]
+    },
+    {
+        "id": "64ae73b7.a4b444",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "офф",
+        "func": "var characteristic = {};\n\ncharacteristic.On = false;\n\n\n\nmsg.payload = characteristic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 393,
+        "y": 766.9998779296875,
+        "wires": [
+            [
+                "5f119f9.7abaee"
+            ]
+        ]
+    },
+    {
+        "id": "15e2d51.f2c1b2b",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Луна",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"set_power\",\n    \"params\":[\n        \"on\",\n        \"smooth\",\n        500,\n        5\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 877.0000152587891,
+        "y": 758.9998474121094,
+        "wires": [
+            [
+                "425636a3.49a06"
+            ]
+        ]
+    },
+    {
+        "id": "f45eae76.354988",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Солнце",
+        "func": "var payload = {\n    \"id\":1,\n    \"method\":\"set_power\",\n    \"params\":[\n        \"on\",\n        \"smooth\",\n        500,\n        1\n    ]\n};\n\nreturn { payload: JSON.stringify(payload)+'\\r\\n' };",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 877,
+        "y": 812.9998779296875,
+        "wires": [
+            [
+                "425636a3.49a06"
+            ]
+        ]
+    },
+    {
+        "id": "d40fd354.ac4ec",
+        "type": "link in",
+        "z": "91493882.e5498",
+        "name": "В лампу",
+        "links": [
+            "2b533cb8.962aac",
+            "158c0d4b.ac850b",
+            "425636a3.49a06",
+            "8651ed24.52dd38",
+            "ff94da8f.a4de38",
+            "d7261c5a.31559",
+            "de55c14e.0d7fe8",
+            "133ba6ad.21bbe1",
+            "7f1f7bb8.82462c",
+            "98931c29.f6344",
+            "c2d774f3.9249f8",
+            "adc6d672.e2ba6",
+            "65ab72a8.4de694",
+            "75bcb5bf.73390c",
+            "64459737.bcf258"
+        ],
+        "x": 386.227294921875,
+        "y": 20,
+        "wires": [
+            [
+                "d89121ed.0ba9e"
+            ]
+        ]
+    },
+    {
+        "id": "425636a3.49a06",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 969.5,
+        "y": 782.9998779296875,
+        "wires": []
+    },
+    {
+        "id": "ff94da8f.a4de38",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 1078,
+        "y": 937.9998626708984,
+        "wires": []
+    },
+    {
+        "id": "d7261c5a.31559",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 1075,
+        "y": 859.9998626708984,
+        "wires": []
+    },
+    {
+        "id": "de55c14e.0d7fe8",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 1076,
+        "y": 902.9998626708984,
+        "wires": []
+    },
+    {
+        "id": "133ba6ad.21bbe1",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 1081,
+        "y": 976.9998626708984,
+        "wires": []
+    },
+    {
+        "id": "7f1f7bb8.82462c",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 1066.0000305175781,
+        "y": 1190.9998168945312,
+        "wires": []
+    },
+    {
+        "id": "c2d774f3.9249f8",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 1094.9999694824219,
+        "y": 1066.9999389648438,
+        "wires": []
+    },
+    {
+        "id": "adc6d672.e2ba6",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 1096.9999694824219,
+        "y": 1106.9998168945312,
+        "wires": []
+    },
+    {
+        "id": "65ab72a8.4de694",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 1102.0000305175781,
+        "y": 1156.9999084472656,
+        "wires": []
+    },
+    {
+        "id": "75bcb5bf.73390c",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 1030.0000305175781,
+        "y": 1279.9998168945312,
+        "wires": []
+    },
+    {
+        "id": "64459737.bcf258",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "d40fd354.ac4ec"
+        ],
+        "x": 1033.0000305175781,
+        "y": 1319.9998168945312,
+        "wires": []
+    },
+    {
+        "id": "cd264431.2cb0a",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Конверт ct",
+        "func": "msg.payload.ColorTemperature = 640 - Math.round(msg.payload.ColorTemperature/13);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1131.0000305175781,
+        "y": 198.00000190734863,
+        "wires": [
+            [
+                "1e568a4a.90bfc6"
+            ]
+        ]
+    },
+    {
+        "id": "1e568a4a.90bfc6",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "больше 500",
+        "property": "msg.payload.ColorTemperature",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "500",
+                "vt": "num"
+            },
+            {
+                "t": "gt",
+                "v": "500",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 851.4999771118164,
+        "y": 248.99999237060547,
+        "wires": [
+            [
+                "83a25a00.301ae8"
+            ],
+            [
+                "2f3bca2f.4ede6e"
+            ]
+        ]
+    },
+    {
+        "id": "2f3bca2f.4ede6e",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "500",
+        "rules": [
+            {
+                "t": "set",
+                "p": "msg.payload.ColorTemperature2",
+                "pt": "msg",
+                "to": "500",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 983.4999771118164,
+        "y": 284.0000228881836,
+        "wires": [
+            [
+                "83a25a00.301ae8"
+            ]
+        ]
+    },
+    {
+        "id": "656b55d3.23497c",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "500",
+        "rules": [
+            {
+                "t": "set",
+                "p": "msg.payload.bg_ColorTemperature",
+                "pt": "msg",
+                "to": "500",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100.0000381469727,
+        "y": 380.0000534057617,
+        "wires": [
+            [
+                "8187e800.c549f"
+            ]
+        ]
+    },
+    {
+        "id": "f35e6d7.884551",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "больше 500",
+        "property": "msg.payload.bg_ColorTemperature",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "500",
+                "vt": "num"
+            },
+            {
+                "t": "gt",
+                "v": "500",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 952.0000991821289,
+        "y": 364.99999237060547,
+        "wires": [
+            [
+                "8187e800.c549f"
+            ],
+            [
+                "656b55d3.23497c"
+            ]
+        ]
+    },
+    {
+        "id": "83a25a00.301ae8",
+        "type": "function",
+        "z": "91493882.e5498",
+        "name": "Конверт ct подсветки",
+        "func": "msg.payload.bg_colorTemperature = 640 - Math.round(msg.payload.bg_ColorTemperature/13);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1112.5000381469727,
+        "y": 241.99999237060547,
+        "wires": [
+            [
+                "f35e6d7.884551"
+            ]
+        ]
+    },
+    {
+        "id": "af3b7c59.029c58",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "on",
+        "property": "payload.On",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 752,
+        "y": 787.9998779296875,
+        "wires": [
+            [
+                "15e2d51.f2c1b2b"
+            ],
+            [
+                "f45eae76.354988"
+            ]
+        ]
+    },
+    {
+        "id": "abe89ad7.80096",
+        "type": "link in",
+        "z": "91493882.e5498",
+        "name": "ct",
+        "links": [
+            "4a2a9117.32aa2",
+            "51bc93f6.3035bc",
+            "8fd6d970.18fe98",
+            "b89ea52b.53d848",
+            "59204a4c.fd5b04",
+            "df5ac15b.8ace78",
+            "8187e800.c549f"
+        ],
+        "x": 165.5,
+        "y": 977.9998626708984,
+        "wires": [
+            [
+                "cb65527.c4c123"
+            ]
+        ]
+    },
+    {
+        "id": "4a2a9117.32aa2",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "ct",
+        "links": [
+            "abe89ad7.80096"
+        ],
+        "x": 784.5,
+        "y": 507.00001525878906,
+        "wires": []
+    },
+    {
+        "id": "500ed6e6.e9356",
+        "type": "link in",
+        "z": "91493882.e5498",
+        "name": "ON",
+        "links": [
+            "3fb4e6ce.0292a2",
+            "8187e800.c549f",
+            "c40e666a.3d8ec8"
+        ],
+        "x": 167.5,
+        "y": 888.9998626708984,
+        "wires": [
+            [
+                "aefef378.a3d9d"
+            ]
+        ]
+    },
+    {
+        "id": "b8434e6c.404c98",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "br",
+        "links": [
+            "363ed5c8.449bfa"
+        ],
+        "x": 818.5000305175781,
+        "y": 435.00012969970703,
+        "wires": []
+    },
+    {
+        "id": "363ed5c8.449bfa",
+        "type": "link in",
+        "z": "91493882.e5498",
+        "name": "br",
+        "links": [
+            "8187e800.c549f",
+            "b8434e6c.404c98",
+            "bf4e8a5a.61d908"
+        ],
+        "x": 166.5,
+        "y": 934.9998626708984,
+        "wires": [
+            [
+                "e0b4e9fe.683648"
+            ]
+        ]
+    },
+    {
+        "id": "f105a189.46d56",
+        "type": "link in",
+        "z": "91493882.e5498",
+        "name": "onoff",
+        "links": [
+            "28d34cfa.30af5c",
+            "5849e536.078d6c",
+            "8187e800.c549f",
+            "ead720.2784b8e"
+        ],
+        "x": 167,
+        "y": 1028.9998626708984,
+        "wires": [
+            [
+                "8bf2c87d.48b638"
+            ]
+        ]
+    },
+    {
+        "id": "28d34cfa.30af5c",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "onoff",
+        "links": [
+            "f105a189.46d56"
+        ],
+        "x": 822.0000915527344,
+        "y": 302.99998474121094,
+        "wires": []
+    },
+    {
+        "id": "3f5519dc.a1929e",
+        "type": "link in",
+        "z": "91493882.e5498",
+        "name": "bg_br",
+        "links": [
+            "1d48a22c.aab546",
+            "8187e800.c549f",
+            "b8034b64.c52d6"
+        ],
+        "x": 169,
+        "y": 1071.9998626708984,
+        "wires": [
+            [
+                "a32370fc.78d048"
+            ]
+        ]
+    },
+    {
+        "id": "1d48a22c.aab546",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "bg_br",
+        "links": [
+            "3f5519dc.a1929e"
+        ],
+        "x": 639.5,
+        "y": 550.9999885559082,
+        "wires": []
+    },
+    {
+        "id": "90442845.ae446",
+        "type": "link in",
+        "z": "91493882.e5498",
+        "name": "bg_ct",
+        "links": [
+            "611874d5.5729dc",
+            "1cc7425d.ffeb2e",
+            "99c7427a.21fed",
+            "3f698d9a.4475a2",
+            "12aba33.0b2c95d",
+            "72370473.b3ca8c",
+            "8187e800.c549f"
+        ],
+        "x": 170,
+        "y": 1113.9998626708984,
+        "wires": [
+            [
+                "bd3ba4a5.06e84"
+            ]
+        ]
+    },
+    {
+        "id": "611874d5.5729dc",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "bg_ct",
+        "links": [
+            "90442845.ae446"
+        ],
+        "x": 860.5,
+        "y": 577.9999885559082,
+        "wires": []
+    },
+    {
+        "id": "1cc7425d.ffeb2e",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "bg_ct",
+        "links": [
+            "90442845.ae446"
+        ],
+        "x": 745,
+        "y": 615.9999885559082,
+        "wires": []
+    },
+    {
+        "id": "ce683d24.f79ae",
+        "type": "link in",
+        "z": "91493882.e5498",
+        "name": "bg_sat",
+        "links": [
+            "551d26da.c706b",
+            "8187e800.c549f"
+        ],
+        "x": 172,
+        "y": 1200.9998626708984,
+        "wires": [
+            [
+                "6cc2364.bb78448"
+            ]
+        ]
+    },
+    {
+        "id": "551d26da.c706b",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "bg_sat",
+        "links": [
+            "ce683d24.f79ae"
+        ],
+        "x": 557.5,
+        "y": 693.9999885559082,
+        "wires": []
+    },
+    {
+        "id": "8187e800.c549f",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "Остальные параметры",
+        "links": [
+            "2fb7e867.f2e658",
+            "363ed5c8.449bfa",
+            "3f5519dc.a1929e",
+            "500ed6e6.e9356",
+            "90442845.ae446",
+            "abe89ad7.80096",
+            "ce683d24.f79ae",
+            "f016e23e.109798",
+            "f105a189.46d56"
+        ],
+        "x": 1207.9999160766602,
+        "y": 359.0000534057617,
+        "wires": []
+    },
+    {
+        "id": "f016e23e.109798",
+        "type": "link in",
+        "z": "91493882.e5498",
+        "name": "hue",
+        "links": [
+            "69ad63a.dbc441c",
+            "8187e800.c549f",
+            "8d6352e0.e61b8"
+        ],
+        "x": 172,
+        "y": 1153.9998626708984,
+        "wires": [
+            [
+                "498a11bd.77fcb8"
+            ]
+        ]
+    },
+    {
+        "id": "69ad63a.dbc441c",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "hue",
+        "links": [
+            "f016e23e.109798"
+        ],
+        "x": 874.5,
+        "y": 648.9999885559082,
+        "wires": []
+    },
+    {
+        "id": "53d12eb3.57bb8",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "",
+        "property": "hap.context",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 644.0000305175781,
+        "y": 935.9998931884766,
+        "wires": [
+            [
+                "cb87a99c.d4e1d8",
+                "d5da233d.40f718",
+                "40c81cae.6aec14"
+            ]
+        ]
+    },
+    {
+        "id": "2f805e9c.f78652",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "",
+        "property": "hap.context",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 641.0000305175781,
+        "y": 1119.9998931884766,
+        "wires": [
+            [
+                "f349f06f.27c9e",
+                "1146f06f.5e3d4",
+                "16b1982f.94f2d8",
+                "3505eaab.a34f2e",
+                "50c24f12.849628"
+            ]
+        ]
+    },
+    {
+        "id": "6899ce0.a342234",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "",
+        "property": "hap.context",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 635,
+        "y": 787.9998779296875,
+        "wires": [
+            [
+                "af3b7c59.029c58"
+            ]
+        ]
+    },
+    {
+        "id": "37094c5.a83cc34",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Основной включен",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.On",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 577.0000610351562,
+        "y": 204,
+        "wires": [
+            [
+                "c40e666a.3d8ec8"
+            ]
+        ]
+    },
+    {
+        "id": "2e7a6e79.eff20a",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "Основной выключен",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.On",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 578.5000305175781,
+        "y": 241,
+        "wires": [
+            [
+                "c40e666a.3d8ec8"
+            ]
+        ]
+    },
+    {
+        "id": "c40e666a.3d8ec8",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "",
+        "links": [
+            "500ed6e6.e9356"
+        ],
+        "x": 721.5,
+        "y": 231,
+        "wires": []
+    },
+    {
+        "id": "4a73ad58.49fddc",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "осн вкл/выкл",
+        "property": "payload.params.power",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 376,
+        "y": 227,
+        "wires": [
+            [
+                "37094c5.a83cc34"
+            ],
+            [
+                "2e7a6e79.eff20a"
+            ]
+        ]
+    },
+    {
+        "id": "b843ce75.9ed83",
+        "type": "switch",
+        "z": "91493882.e5498",
+        "name": "Изменение режима",
+        "property": "payload.params.active_mode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 557.8345642089844,
+        "y": 366.0588836669922,
+        "wires": [
+            [
+                "ec16d936.aa2e4"
+            ],
+            [
+                "b397a020.0d92c8"
+            ]
+        ]
+    },
+    {
+        "id": "ec16d936.aa2e4",
+        "type": "link out",
+        "z": "91493882.e5498",
+        "name": "режим",
+        "links": [
+            "2fb7e867.f2e658"
+        ],
+        "x": 696.1432800292969,
+        "y": 363.47059631347656,
+        "wires": []
+    },
+    {
+        "id": "2fb7e867.f2e658",
+        "type": "link in",
+        "z": "91493882.e5498",
+        "name": "режим",
+        "links": [
+            "8187e800.c549f",
+            "ec16d936.aa2e4",
+            "2ece4550.37f80a"
+        ],
+        "x": 161.14337158203125,
+        "y": 786.9668121337891,
+        "wires": [
+            [
+                "64ef165e.357f58"
+            ]
+        ]
+    },
+    {
+        "id": "27ffb74d.cdf018",
+        "type": "change",
+        "z": "91493882.e5498",
+        "name": "ярскость",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.Brightness",
+                "pt": "msg",
+                "to": "payload.bg_Brightness",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 819.8346862792969,
+        "y": 1055.8234252929688,
+        "wires": [
+            [
+                "43e8095.08338f8"
+            ]
+        ]
+    },
+    {
+        "id": "f9a77c1b.b12fd",
+        "type": "homekit-bridge",
+        "z": "",
+        "bridgeName": "NR",
+        "pinCode": "111-11-111",
+        "port": "",
+        "allowInsecureRequest": false,
+        "manufacturer": "Default Manufacturer",
+        "model": "Default Model",
+        "serialNo": "Default Serial Number"
+    }
+]
